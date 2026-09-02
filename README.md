@@ -2,6 +2,8 @@
 
 **Real-time event intelligence, log analytics, and anomaly detection platform.**
 
+**Repository:** https://github.com/Scarlet-Twinz/logvault
+
 LogVault is an event-driven observability system designed to ingest application events, process them asynchronously, aggregate operational metrics, detect abnormal error-rate behavior, and stream insights to a real-time dashboard.
 
 It demonstrates how modern backend systems can combine **Fastify, Redis, BullMQ, PostgreSQL, Prisma, Socket.IO, and Next.js** into a reliable event-processing pipeline.
