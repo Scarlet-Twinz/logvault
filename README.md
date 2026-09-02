@@ -493,13 +493,9 @@ The project focuses on:
 * Monorepo architecture
 * Automated testing
 
-##Deployment
+#Deployment
+Deployment: The project is configured for deployment, but a public hosted URL is not currently provided. The application can be run locally by following the Local Development instructions above.
 
-Nexora has been deployed and is available as a live application.
-
-Live URL: Add your deployed URL here.
-
-The application is structured for containerized deployment with separate application, database, and background-worker responsibilities.
 ---
 
 ## License
