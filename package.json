@@ -1,0 +1,23 @@
+{
+  "name": "logvault",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Real-time event analytics and anomaly detection system",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "start": "turbo start",
+    "lint": "turbo lint",
+    "test": "turbo test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "dotenv": "^17.4.2",
+    "turbo": "^2.5.6",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}
