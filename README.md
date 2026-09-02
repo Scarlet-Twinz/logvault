@@ -493,7 +493,7 @@ The project focuses on:
 * Monorepo architecture
 * Automated testing
 
-Deployment
+##Deployment
 
 Nexora has been deployed and is available as a live application.
 
