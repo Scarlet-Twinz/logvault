@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id        String   @id @default(cuid())
+  service   String
+  level     String   // info, warn, error, critical
+  message   String
+  metadata  Json?    // arbitrary fields
+  timestamp DateTime @default(now())
+  receivedAt DateTime @default(now())
+  createdAt DateTime @default(now())
+
+  @@index([service, timestamp])
+  @@index([service, level, timestamp])
+}
+
+model Aggregation {
+  id        String   @id @default(cuid())
+  service   String
+  level     String
+  bucket    DateTime // 1-minute bucket start time
+  count     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([service, level, bucket])
+  @@index([service, level, bucket])
+}
+
+model Anomaly {
+  id           String   @id @default(cuid())
+  service      String
+  level        String
+  type         String   // spike, drop
+  severity     String   // low, medium, high, critical
+  baselineValue Float
+  observedValue Int
+  zScore       Float
+  detectedAt   DateTime @default(now())
+  resolvedAt   DateTime?
+  details      Json?    // event_count, threshold, rate, etc.
+  createdAt    DateTime @default(now())
+
+  @@index([service, detectedAt])
+  @@index([severity])
+}

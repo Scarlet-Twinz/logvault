@@ -1,0 +1,21 @@
+{
+  "name": "@logvault/db",
+  "version": "0.1.0",
+  "private": true,
+  "description": "LogVault database layer with Prisma",
+  "main": "src/index.ts",
+  "scripts": {
+    "generate": "prisma generate",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "seed": "tsx src/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.9.1"
+  },
+  "devDependencies": {
+    "prisma": "^5.9.1",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.3"
+  }
+}
