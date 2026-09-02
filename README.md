@@ -495,8 +495,9 @@ The project focuses on:
   
 ---
 
-#Deployment
-Deployment: The project is configured for deployment, but a public hosted URL is not currently provided. The application can be run locally by following the Local Development instructions above.
+##Deployment
+
+ The project is configured for deployment, but a public hosted URL is not currently provided. The application can be run locally by following the Local Development instructions above.
 
 ---
 
