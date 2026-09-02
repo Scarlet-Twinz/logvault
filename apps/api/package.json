@@ -1,0 +1,28 @@
+{
+  "name": "@logvault/api",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.3.0",
+    "@fastify/helmet": "^13.1.1",
+    "@logvault/db": "workspace:*",
+    "@logvault/shared": "workspace:*",
+    "bullmq": "^6.3.3",
+    "fastify": "^5.12.1",
+    "ioredis": "^6.0.0",
+    "pino": "^10.3.1",
+    "socket.io": "^4.8.3",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "26.3.0",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  }
+}

@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Event {
+  id        String   @id @default(cuid())
+  timestamp DateTime @default(now())
+  service   String
+  level     String
+  message   String
+  source    String?
+  metadata  Json?
+
+  createdAt DateTime @default(now())
+
+  @@index([timestamp])
+  @@index([service])
+  @@index([level])
+}
+
+model Metric {
+  id           String   @id @default(cuid())
+  timestamp    DateTime
+  service      String
+  eventCount   Int      @default(0)
+  errorCount   Int      @default(0)
+  warningCount Int      @default(0)
+  anomalyScore Float?
+
+  createdAt DateTime @default(now())
+
+  @@unique([service, timestamp])
+  @@index([timestamp])
+  @@index([service])
+}
+model Anomaly {
+  id          String   @id @default(cuid())
+  detectedAt  DateTime @default(now())
+  service     String
+  metric      String
+  value       Float
+  baseline    Float
+  score       Float
+  severity    String
+  description String
+
+  createdAt DateTime @default(now())
+
+  @@index([detectedAt])
+  @@index([service])
+  @@index([severity])
+}
+
+

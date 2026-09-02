@@ -1,0 +1,24 @@
+{
+  "name": "@logvault/worker",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@logvault/db": "workspace:*",
+    "@logvault/shared": "workspace:*",
+    "@prisma/client": "7.10.0",
+    "bullmq": "^6.3.3",
+    "ioredis": "^6.0.0",
+    "socket.io-client": "^4.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "26.3.0",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  }
+}

@@ -1,0 +1,291 @@
+.page {
+  min-height: 100vh;
+  padding: 36px;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(45, 125, 255, 0.12), transparent 30%),
+    radial-gradient(circle at 85% 20%, rgba(0, 220, 180, 0.07), transparent 25%),
+    #070b12;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  max-width: 1500px;
+  margin: 0 auto 30px;
+}
+
+.brand {
+  color: #65a8ff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: -0.04em;
+}
+
+.header p {
+  margin: 10px 0 0;
+  color: #7f8da3;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 14px;
+  border: 1px solid #263143;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.status span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #697589;
+}
+
+.online span {
+  background: #28d7a3;
+  box-shadow: 0 0 12px rgba(40, 215, 163, 0.7);
+}
+
+.online {
+  color: #72e8bf;
+}
+
+.offline {
+  color: #8792a4;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 1500px;
+  margin: 0 auto 20px;
+}
+
+.stat {
+  padding: 22px;
+  background: rgba(14, 20, 31, 0.8);
+  border: 1px solid #1c2738;
+  border-radius: 14px;
+}
+
+.stat span {
+  display: block;
+  color: #7f8da3;
+  font-size: 13px;
+  margin-bottom: 9px;
+}
+
+.stat strong {
+  font-size: 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 20px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.panel {
+  min-height: 560px;
+  overflow: hidden;
+  background: rgba(10, 15, 24, 0.88);
+  border: 1px solid #1c2738;
+  border-radius: 16px;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px;
+  border-bottom: 1px solid #1c2738;
+}
+
+.panelHeader h2 {
+  margin: 0 0 5px;
+  font-size: 17px;
+}
+
+.panelHeader span {
+  color: #748197;
+  font-size: 12px;
+}
+
+.counter {
+  min-width: 30px;
+  padding: 5px 9px;
+  text-align: center;
+  border-radius: 8px;
+  background: #131e30;
+  color: #7eb5ff !important;
+  font-weight: 700;
+}
+
+.eventList,
+.anomalyList {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.event {
+  display: flex;
+  gap: 14px;
+  padding: 17px 22px;
+  border-bottom: 1px solid #141d2b;
+}
+
+.level {
+  align-self: flex-start;
+  min-width: 58px;
+  padding: 5px 7px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.info {
+  background: #12253d;
+  color: #70b2ff;
+}
+
+.warn {
+  background: #382d12;
+  color: #e9bd55;
+}
+
+.error {
+  background: #3a171c;
+  color: #ff7180;
+}
+
+.debug {
+  background: #20232b;
+  color: #9da7b7;
+}
+
+.eventBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.eventTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.eventTop strong {
+  font-size: 13px;
+}
+
+.eventTop time {
+  color: #59667a;
+  font-size: 11px;
+}
+
+.event p {
+  margin: 6px 0 0;
+  color: #8794a8;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.anomaly {
+  margin: 14px;
+  padding: 17px;
+  border: 1px solid #35252b;
+  border-radius: 12px;
+  background: rgba(45, 20, 26, 0.32);
+}
+
+.anomalyTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  color: #626f83;
+  font-size: 11px;
+}
+
+.severity {
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.critical {
+  background: #4a1720;
+  color: #ff7180;
+}
+
+.high {
+  background: #402713;
+  color: #f0a75b;
+}
+
+.medium {
+  background: #3c3414;
+  color: #e5c45c;
+}
+
+.anomaly > strong {
+  font-size: 14px;
+}
+
+.anomaly p {
+  margin: 8px 0 14px;
+  color: #8b96a7;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.score {
+  color: #657286;
+  font-size: 11px;
+}
+
+.score b {
+  color: #ff7180;
+}
+
+.empty {
+  padding: 70px 20px;
+  text-align: center;
+  color: #586579;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding: 20px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    gap: 20px;
+    flex-direction: column;
+  }
+}
