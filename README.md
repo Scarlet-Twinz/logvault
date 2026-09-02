@@ -508,4 +508,4 @@ This project is intended as a portfolio and learning project.
 Author
 Scarlet-Twinz
 
-GitHub: https://github.com/Scarlet-Twins
+GitHub: https://github.com/Scarlet-Twinz
