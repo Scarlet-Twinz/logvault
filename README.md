@@ -2,11 +2,11 @@
 
 **Real-time event intelligence, log analytics, and anomaly detection platform.**
 
-**Repository:** https://github.com/Scarlet-Twinz/logvault
-
 LogVault is an event-driven observability system designed to ingest application events, process them asynchronously, aggregate operational metrics, detect abnormal error-rate behavior, and stream insights to a real-time dashboard.
 
 It demonstrates how modern backend systems can combine **Fastify, Redis, BullMQ, PostgreSQL, Prisma, Socket.IO, and Next.js** into a production-oriented event-processing pipeline.
+
+> **Evaluation note:** LogVault does not currently have a public hosted URL. The repository is intentionally documented for local evaluation, with the complete setup path below.
 
 ---
 
@@ -89,10 +89,11 @@ The included simulator generates application traffic and controlled traffic spik
 | ORM | Prisma |
 | Realtime | Socket.IO |
 | Monorepo | Turborepo |
-| Package Manager | pnpm |
+| Package Manager | pnpm 11.23 |
+| Language | TypeScript 7 |
+| Runtime | Node.js 24+ |
 | Testing | Vitest |
 | Infrastructure | Docker Compose |
-| Language | TypeScript |
 
 ---
 
@@ -123,9 +124,17 @@ logvault/
 
 Install:
 
-- Node.js
-- pnpm
+- Node.js 24 or newer
+- pnpm 11.23 or compatible pnpm 11 release
 - Docker Desktop
+
+Verify:
+
+```bash
+node --version
+pnpm --version
+docker --version
+```
 
 ### 1. Clone the repository
 
@@ -282,6 +291,12 @@ Worker tests:
 pnpm --filter @logvault/worker test
 ```
 
+Type checking:
+
+```bash
+pnpm check-types
+```
+
 ---
 
 ## Build
@@ -310,7 +325,9 @@ LogVault demonstrates several reliability-oriented patterns:
 
 ## Deployment
 
-The project is configured for deployment, but a public hosted URL is not currently provided. Follow the local development instructions to run the complete system.
+The repository contains the configuration required to run the system locally and to form the basis of a deployment. A public hosted deployment is **not currently provided**.
+
+For portfolio evaluation, use the local setup above. This avoids presenting an unavailable or expired hosted URL as a live demo.
 
 ---
 
@@ -330,6 +347,6 @@ This project is intended as a portfolio and learning project.
 
 **Anthony Emmanuella Mmasinachi**
 
-Full-stack developer focused on frontend engineering, backend systems, APIs, automation, and practical software architecture.
+Full-stack developer focused on frontend engineering, backend systems, APIs, automation, databases, realtime applications, and practical software architecture.
 
 **GitHub:** https://github.com/Scarlet-Twinz
