@@ -10,6 +10,12 @@ It demonstrates how modern backend systems can combine **Fastify, Redis, BullMQ,
 
 ---
 
+## Product Preview
+
+A conceptual view of LogVault as an observability workspace: a live operations dashboard focused on event volume, error and warning rates, service health, anomaly signals, recent events, and realtime updates. The interface represents how an engineering team could move from **incoming events → asynchronous processing → anomaly detection → operational insight**.
+
+---
+
 ## Architecture
 
 ```text
