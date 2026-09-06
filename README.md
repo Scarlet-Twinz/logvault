@@ -4,15 +4,11 @@
 
 LogVault is an event-driven observability system designed to ingest application events, process them asynchronously, aggregate operational metrics, detect abnormal error-rate behavior, and stream insights to a real-time dashboard.
 
-It demonstrates how modern backend systems can combine **Fastify, Redis, BullMQ, PostgreSQL, Prisma, Socket.IO, and Next.js** into a production-oriented event-processing pipeline.
-
-> **Evaluation note:** LogVault does not currently have a public hosted URL. The repository is intentionally documented for local evaluation, with the complete setup path below.
-
----
+It combines **Fastify, Redis, BullMQ, PostgreSQL, Prisma, Socket.IO, and Next.js** into an event-processing pipeline with separate API, worker, simulator, and dashboard components.
 
 ## Product Preview
 
-A conceptual view of LogVault as an observability workspace: a live operations dashboard focused on event volume, error and warning rates, service health, anomaly signals, recent events, and realtime updates. The interface represents how an engineering team could move from **incoming events → asynchronous processing → anomaly detection → operational insight**.
+A conceptual view of LogVault as an observability workspace: a live operations dashboard focused on event volume, error and warning rates, service health, anomaly signals, recent events, and realtime updates. The interface represents the flow from **incoming events → asynchronous processing → anomaly detection → operational insight**.
 
 ---
 
@@ -331,23 +327,26 @@ LogVault demonstrates several reliability-oriented patterns:
 
 ## Deployment
 
-The repository contains the configuration required to run the system locally and to form the basis of a deployment. A public hosted deployment is **not currently provided**.
+The repository contains the configuration required to run the system locally and to form the basis of a deployment. A public hosted deployment is not currently provided.
 
-For portfolio evaluation, use the local setup above. This avoids presenting an unavailable or expired hosted URL as a live demo.
+## Engineering Focus
 
----
+LogVault focuses on event-driven systems and observability concerns:
 
-## Why LogVault?
-
-LogVault was built as a practical demonstration of backend and distributed-systems engineering rather than a simple CRUD application.
-
-It focuses on event-driven architecture, asynchronous processing, observability, realtime communication, statistical anomaly detection, database design, automated testing, and monorepo architecture.
+- asynchronous event processing;
+- queue-based workload isolation;
+- operational metric aggregation;
+- statistical anomaly detection;
+- realtime communication;
+- database design and constraints;
+- worker reliability and graceful shutdown;
+- automated testing and monorepo architecture.
 
 ---
 
 ## License
 
-This project is intended as a portfolio and learning project.
+MIT
 
 ## Author
 
