@@ -354,4 +354,4 @@ MIT
 
 Full-stack developer focused on frontend engineering, backend systems, APIs, automation, databases, realtime applications, and practical software architecture.
 
-**GitHub:** https://github.com/Scarlet-Twinz
+**GitHub Repository:** https://github.com/Scarlet-Twinz/logvault
