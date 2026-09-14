@@ -1,64 +1,59 @@
-# LogVault
+# LOGVAULT
 
 **Real-time event intelligence, log analytics, and anomaly detection platform.**
 
-LogVault is an event-driven observability system designed to ingest application events, process them asynchronously, aggregate operational metrics, detect abnormal error-rate behavior, and stream insights to a real-time dashboard.
+LOGVAULT is an event-driven observability system built around a simple pipeline: ingest events, move processing off the request path, derive operational metrics, detect abnormal error-rate behavior, and stream the resulting state to a live dashboard.
 
-It combines **Fastify, Redis, BullMQ, PostgreSQL, Prisma, Socket.IO, and Next.js** into an event-processing pipeline with separate API, worker, simulator, and dashboard components.
-
-## Product Preview
-
-A conceptual view of LogVault as an observability workspace: a live operations dashboard focused on event volume, error and warning rates, service health, anomaly signals, recent events, and realtime updates. The interface represents the flow from **incoming events → asynchronous processing → anomaly detection → operational insight**.
-
----
-
-## Architecture
+## System Flow
 
 ```text
 Event Producers
       │
       ▼
- Fastify API
+  Fastify API
       │
       ▼
-Redis + BullMQ
+ Redis + BullMQ
       │
       ▼
-Background Worker
-   ┌──┴───────────┐
-   ▼              ▼
-PostgreSQL   Anomaly Detection
-   │              │
-   └──────┬───────┘
-          ▼
-      Socket.IO
-          │
-          ▼
-     Next.js UI
+ Background Worker
+   ┌──┴─────────────┐
+   ▼                ▼
+PostgreSQL     Anomaly Detection
+   │                │
+   └───────┬────────┘
+           ▼
+       Socket.IO
+           │
+           ▼
+       Next.js UI
 ```
 
----
+The API accepts events and validates them. BullMQ provides the asynchronous boundary. The worker aggregates operational data and evaluates error-rate behavior. Socket.IO publishes current state to connected dashboard clients.
 
-## Features
+## What It Demonstrates
 
 ### Event ingestion
 
-- REST API for application events
-- Zod request validation
+- REST event ingestion
+- Zod validation
 - `INFO`, `WARN`, `ERROR`, and `DEBUG` levels
-- Optional timestamps, sources, and metadata
-- Asynchronous processing through BullMQ
+- Source, timestamp, and metadata fields
+- Queue-backed asynchronous processing
 
-### Asynchronous processing
+### Processing and reliability
 
-- Redis-backed BullMQ queue
-- Dedicated background worker
-- Configurable worker concurrency
-- Failed-job handling and graceful shutdown
+- Redis-backed BullMQ queues
+- Dedicated worker process
+- Configurable concurrency
+- Failed-job handling
+- Graceful worker shutdown
+- Bounded API queries
+- Database indexes and constraints
 
-### Event analytics
+### Operational analytics
 
-- Total event volume
+- Event volume
 - Error and warning counts
 - Service-level metrics
 - Hourly metric windows
@@ -66,17 +61,42 @@ PostgreSQL   Anomaly Detection
 
 ### Anomaly detection
 
-The worker compares a service's current error rate against a historical baseline and produces severity levels such as `MEDIUM`, `HIGH`, and `CRITICAL` when abnormal behavior is detected.
+The worker compares a service's current error-rate behavior with a historical baseline and emits severity levels such as `MEDIUM`, `HIGH`, and `CRITICAL` when abnormal behavior is detected.
 
-### Real-time dashboard
+### Realtime operations
 
-The Next.js dashboard provides live event statistics, event streams, detected anomalies, service information, and Socket.IO updates.
+Socket.IO pushes event, metric, and anomaly updates to the dashboard without requiring continuous page refreshes.
 
-### Event simulator
+### Traffic simulator
 
-The included simulator generates application traffic and controlled traffic spikes for demonstrating anomaly detection.
+The repository includes a simulator for generating application traffic and controlled spikes so the anomaly pipeline can be exercised locally.
 
----
+## Engineering Model
+
+LOGVAULT deliberately separates the responsibilities of request handling, queueing, processing, persistence, anomaly analysis, and presentation.
+
+That makes the project useful as a study of what happens when an application moves from synchronous CRUD toward an event-processing architecture:
+
+```text
+HTTP request
+    │
+    ├── validate
+    └── enqueue
+          │
+          ▼
+       worker
+          │
+     ┌────┴────┐
+     ▼         ▼
+ metrics    anomalies
+     │         │
+     └────┬────┘
+          ▼
+      persistence
+          │
+          ▼
+       realtime
+```
 
 ## Tech Stack
 
@@ -86,165 +106,82 @@ The included simulator generates application traffic and controlled traffic spik
 | API | Fastify |
 | Validation | Zod |
 | Queue | BullMQ |
-| Message Broker | Redis |
-| Database | PostgreSQL |
-| ORM | Prisma |
+| Broker | Redis |
+| Database | PostgreSQL, Prisma |
 | Realtime | Socket.IO |
 | Monorepo | Turborepo |
-| Package Manager | pnpm 11.23 |
-| Language | TypeScript 7 |
+| Language | TypeScript |
 | Runtime | Node.js 24+ |
 | Testing | Vitest |
 | Infrastructure | Docker Compose |
 
----
-
-## Project Structure
+## Repository Structure
 
 ```text
 logvault/
 ├── apps/
-│   ├── api/
-│   ├── simulator/
-│   ├── web/
-│   └── worker/
+│   ├── api/          # HTTP ingestion/query API
+│   ├── simulator/    # controlled event producer
+│   ├── web/          # realtime dashboard
+│   └── worker/       # asynchronous processing
 ├── packages/
-│   ├── db/
-│   └── shared/
+│   ├── db/           # Prisma schema and persistence
+│   └── shared/       # shared types/utilities
 ├── docker-compose.yml
 ├── package.json
 ├── pnpm-workspace.yaml
-├── turbo.json
-└── tsconfig.json
+└── turbo.json
 ```
 
----
-
-## Getting Started
+## Local Development
 
 ### Prerequisites
 
-Install:
-
-- Node.js 24 or newer
-- pnpm 11.23 or compatible pnpm 11 release
+- Node.js 24+
+- pnpm 11+
 - Docker Desktop
-
-Verify:
-
-```bash
-node --version
-pnpm --version
-docker --version
-```
-
-### 1. Clone the repository
 
 ```bash
 git clone https://github.com/Scarlet-Twinz/logvault.git
 cd logvault
-```
-
-### 2. Install dependencies
-
-```bash
 pnpm install
-```
-
-### 3. Start PostgreSQL and Redis
-
-```bash
 docker compose up -d
 ```
 
-Development services use:
-
-```text
-PostgreSQL → localhost:5434
-Redis      → localhost:6380
-```
-
-### 4. Configure the database
-
-Create `packages/db/.env`:
-
-```env
-DATABASE_URL="postgresql://logvault:logvault@localhost:5434/logvault?schema=public"
-REDIS_URL="redis://localhost:6380"
-```
-
-### 5. Generate Prisma Client
+Configure `packages/db/.env` with the local PostgreSQL and Redis connection values, then:
 
 ```bash
 pnpm --filter @logvault/db generate
-```
-
-### 6. Run database migrations
-
-```bash
 pnpm --filter @logvault/db exec prisma migrate dev
 ```
 
-### 7. Start the API
+Run the services in separate terminals:
 
 ```bash
 pnpm --filter @logvault/api dev
-```
-
-API:
-
-```text
-http://localhost:4000
-```
-
-### 8. Start the worker
-
-In another terminal:
-
-```bash
 pnpm --filter @logvault/worker dev
-```
-
-### 9. Start the dashboard
-
-In another terminal:
-
-```bash
 pnpm --filter @logvault/web dev
-```
-
-Dashboard:
-
-```text
-http://localhost:3000
-```
-
-### 10. Start the simulator
-
-In another terminal:
-
-```bash
 pnpm --filter @logvault/simulator dev
 ```
 
----
+Default endpoints:
 
-## API
-
-### Health
-
-```http
-GET /health
+```text
+Dashboard → http://localhost:3000
+API       → http://localhost:4000
 ```
 
-### Submit an event
+## API Surface
 
 ```http
+GET  /health
 POST /events
-Content-Type: application/json
+GET  /events
+GET  /metrics
+GET  /anomalies
 ```
 
-Example:
+Example event:
 
 ```json
 {
@@ -259,90 +196,35 @@ Example:
 }
 ```
 
-### Query events
-
-```http
-GET /events
-```
-
-### Query metrics
-
-```http
-GET /metrics
-```
-
-### Query anomalies
-
-```http
-GET /anomalies
-```
-
----
-
-## Testing
-
-API tests:
+## Testing & Quality
 
 ```bash
 pnpm --filter @logvault/api test
-```
-
-Worker tests:
-
-```bash
 pnpm --filter @logvault/worker test
-```
-
-Type checking:
-
-```bash
 pnpm check-types
-```
-
----
-
-## Build
-
-```bash
 pnpm build
 ```
 
----
+## Current Status
 
-## Reliability
+**Functional local observability platform.**
 
-LogVault demonstrates several reliability-oriented patterns:
+The repository contains the ingestion API, asynchronous worker, PostgreSQL persistence, anomaly detection, realtime dashboard, simulator, tests, and Docker-based local infrastructure.
 
-- Asynchronous event processing
-- Queue-based workload isolation
-- Worker concurrency control
-- Request validation
-- Database indexes and constraints
-- Worker failure handling
-- Graceful worker shutdown
-- Socket reconnection
-- Bounded API queries
-
----
-
-## Deployment
-
-The repository contains the configuration required to run the system locally and to form the basis of a deployment. A public hosted deployment is not currently provided.
+A public hosted deployment is not currently provided.
 
 ## Engineering Focus
 
-LogVault focuses on event-driven systems and observability concerns:
+LOGVAULT is primarily an exploration of:
 
-- asynchronous event processing;
-- queue-based workload isolation;
-- operational metric aggregation;
+- event-driven architecture;
+- asynchronous workload isolation;
+- queue and worker design;
 - statistical anomaly detection;
-- realtime communication;
-- database design and constraints;
-- worker reliability and graceful shutdown;
-- automated testing and monorepo architecture.
-
----
+- realtime state propagation;
+- database constraints and bounded queries;
+- failure handling and graceful shutdown;
+- monorepo architecture and automated testing.
 
 ## License
 
@@ -352,6 +234,4 @@ MIT
 
 **Anthony Emmanuella Mmasinachi**
 
-Full-stack developer focused on frontend engineering, backend systems, APIs, automation, databases, realtime applications, and practical software architecture.
-
-**GitHub Repository:** https://github.com/Scarlet-Twinz/logvault
+Full-stack and systems engineer focused on backend architecture, distributed processing, realtime systems, databases, networking, AI integration, and practical software engineering.
