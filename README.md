@@ -1,4 +1,4 @@
-# LOGVAULT
+#  LOGVAULT
 
 **Real-time event intelligence, log analytics, and anomaly detection platform.**
 
