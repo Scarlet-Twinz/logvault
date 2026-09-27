@@ -233,6 +233,9 @@ MIT
 
 The repository is organized to make the event-processing path and operational boundaries straightforward to run and inspect locally.
 
+
+The repository is organized to make the event-processing path and operational boundaries straightforward to run and inspect locally.
+
 ## Author
 
 **Anthony Emmanuella Mmasinachi**
