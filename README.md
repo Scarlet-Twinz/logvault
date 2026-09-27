@@ -226,16 +226,6 @@ LOGVAULT is primarily an exploration of:
 - failure handling and graceful shutdown;
 - monorepo architecture and automated testing.
 
-## License
-
-MIT
-
-
-The repository is organized to make the event-processing path and operational boundaries straightforward to run and inspect locally.
-
-
-The repository is organized to make the event-processing path and operational boundaries straightforward to run and inspect locally.
-
 ## Author
 
 **Anthony Emmanuella Mmasinachi**
@@ -247,3 +237,7 @@ Full-stack and systems engineer focused on backend architecture, distributed pro
 - **Repository:** https://github.com/Scarlet-Twinz/logvault
 - **Author:** Anthony Emmanuella Mmasinachi
 - **GitHub:** https://github.com/Scarlet-Twinz
+
+## License
+
+MIT
