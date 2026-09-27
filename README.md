@@ -230,6 +230,9 @@ LOGVAULT is primarily an exploration of:
 
 MIT
 
+
+The repository is organized to make the event-processing path and operational boundaries straightforward to run and inspect locally.
+
 ## Author
 
 **Anthony Emmanuella Mmasinachi**
